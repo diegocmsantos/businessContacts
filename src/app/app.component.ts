@@ -37,10 +37,44 @@ export class AppComponent implements OnInit {
   }
 
   filterCategory(category) {
-  	console.log('category', category);
   	category = category != 0 ? category : null;
   	this._firebaseService.getBusinesses(category)
   		.subscribe(businesses => this.businesses = businesses);
+  }
+
+  addBusiness(
+  	company:string,
+  	category:string,
+  	years_in_business:number,
+  	description:string,
+  	phone:string,
+  	email:string,
+  	street_adress:string,
+  	city:string,
+  	state:string,
+  	zipcode:string
+  ) {
+
+  	const created_at = new Date().toString();
+
+  	const newBusiness = {
+  		company: company,
+  		category: category,
+  		years_in_business: years_in_business,
+  		description: description,
+  		phone: phone,
+  		email: email,
+  		street_adress: street_adress,
+  		city: city,
+  		state: state,
+  		zipcode: zipcode,
+  		created_at: created_at
+  	}
+
+  	this._firebaseService.addBusiness(newBusiness);
+
+  	this.changeState('default');
+
   }
 
 }
