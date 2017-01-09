@@ -16,6 +16,9 @@ export class AppComponent implements OnInit {
   businesses: Business[];
   categories: Category[];
 
+  appState: string;
+  activeKey: string;
+
   constructor(private _firebaseService: FirebaseService) {}
 
   ngOnInit() {
@@ -25,4 +28,12 @@ export class AppComponent implements OnInit {
   	this._firebaseService.getCategories()
   		.subscribe(categories => this.categories = categories);
   }
+
+  changeState(state, key) {
+  	if (key) {
+  		this.activeKey = key;
+  	}
+  	this.appState = state;
+  }
+
 }
